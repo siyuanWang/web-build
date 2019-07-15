@@ -1,0 +1,54 @@
+#set($firstMenu=2)
+<div id="content">
+    <!--breadcrumbs-->
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="/index/" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
+            <a href="/statistics/list" title="问卷统计分析" class="tip-bottom"><i class="icon-home"></i>问卷统计分析</a>
+        </div>
+    </div>
+    <!--End-breadcrumbs-->
+
+    <!--Action boxes-->
+    <div class="container-fluid">
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                <h5>统计列表</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="questionTbody">
+                        #foreach($!vo in $!list)
+                        <tr>
+                            <td style="max-width: 200px;">$!vo.title</td>
+                            <td>
+                                $!dateTool.format('yyyy-MM-dd',$!vo.startTime)
+                            </td>
+                            <td>
+                                $!dateTool.format('yyyy-MM-dd',$!vo.endTime)
+                            </td>
+                            <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss',$!vo.createTime)</td>
+                            <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss',$!vo.updateTime)</td>
+                            <td><a href="/statistics/page/$!vo.id">查看统计</a></td>
+                        </tr>
+                        #end
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['scripts/common/dataTable'], function () {
+    });
+</script>

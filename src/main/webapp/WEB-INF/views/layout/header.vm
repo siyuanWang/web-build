@@ -1,0 +1,16 @@
+<div id="header">
+    <h1><img src="/static/assets/img/logo.png" alt="" style="position: absolute;top: -20px;z-index: 9999;"></h1>
+</div>
+<!--close-Header-part-->
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+    <ul class="nav">
+        <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">欢迎 $!userInfo.loginName</span><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/index/updpassword"><i class="icon-user"></i>修改密码</a></li>
+            </ul>
+        </li>
+        <li class=""><a title="" href="/index/logout"><i class="icon icon-share-alt"></i> <span class="text">注销登录</span></a></li>
+    </ul>
+</div>
+<!--close-top-Header-menu-->

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<configuration scan="true">
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>../logs/search-admin.log</file>
+		<!-- 日志格式 -->
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%class:%line] - %m%n</pattern>
+		</encoder>
+		<!-- 日志级别过滤器 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<!-- 过滤的级别 -->
+			<level>DEBUG</level>
+			<!-- 匹配时的操作：接收（记录） -->
+			<onMatch>ACCEPT</onMatch>
+			<!-- 不匹配时的操作：拒绝（不记录） -->
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>../logs/search-admin.log-%d{yyyy-MM-dd}.tar.gz
+			</FileNamePattern>
+			<MaxHistory>60</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%logger{36}] [%msg]%n</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 保存日志文件的路径 -->
+		<file>../logs/search-admin_error.log</file>
+		<!-- 日志格式 -->
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%class:%line] - %m%n</pattern>
+		</encoder>
+		<!-- 日志级别过滤器 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<!-- 过滤的级别 -->
+			<level>DEBUG</level>
+			<!-- 匹配时的操作：接收（记录） -->
+			<onMatch>ACCEPT</onMatch>
+			<!-- 不匹配时的操作：拒绝（不记录） -->
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<!-- 循环政策：基于时间创建日志文件 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 日志文件名格式 -->
+			<fileNamePattern>../logs/search-admin_error_%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- 最大保存时间：30天-->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- 日志格式 -->
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] - %m%n</pattern>
+		</encoder>
+		<!-- 日志级别过滤器 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<!-- 过滤的级别 -->
+			<level>DEBUG</level>
+			<!-- 匹配时的操作：接收 （记录） -->
+			<onMatch>ACCEPT</onMatch>
+			<!-- 不匹配时的操作：拒绝DENY（不记录）接受：ACCEPT（记录） -->
+			<onMismatch>ACCEPT</onMismatch>
+		</filter>
+	</appender>
+
+	<root level="debug">
+		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="FILE"/>
+		<appender-ref ref="ERROR"/>
+	</root>
+</configuration> 

@@ -1,0 +1,17 @@
+<!--sidebar-menu-->
+<div id="sidebar">
+    <ul>
+        <li class="submenu #if($firstMenu == 1)active open#end"> <a href="#"><i class="icon icon-th-list"></i> <span>大搜数据库</span></a>
+            <ul>
+                <li><a href="/db/query">中间表查询</a></li>
+                <li><a href="/bulk/list">游记数据重跑</a></li>
+            </ul>
+        </li>
+        <li class="submenu #if($firstMenu == 2)active open#end"> <a href="#"><i class="icon icon-th-list"></i> <span>日常运维</span></a>
+            <ul>
+                <li><a href="/statistics/list">工单申请</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!--sidebar-menu-->
