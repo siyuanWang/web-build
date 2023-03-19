@@ -1,5 +1,7 @@
 package com.wry.dongman.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +46,13 @@ public class CommonUtil {
     public static String getCurDate(final String format) {
         final DateTime d = new DateTime();
         return d.toString(format);
+    }
+
+    public static String successResponse() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code", 200);
+        jsonObject.put("msg", "success");
+        return jsonObject.toJSONString();
     }
 
 }

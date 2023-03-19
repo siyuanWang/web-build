@@ -48,10 +48,11 @@ public class UserController {
     public String login(String username, String password, Model model) {
         LOGGER.info("username:{},password:{}", username, password);
         int ret = userService.login(username, password);
+        ModelAndView mv = new ModelAndView();
         if (ret == Constance.Root_User) {//管理员页面
-            return "rootlist";
+            return "redirect:/sku/rootlist";
         } else if (ret == Constance.General_User) {//用户页面
-            return "list";
+            return "redirect:/sku/list";
         }
         model.addAttribute(Constance.ERROR_INFO, "用户名或密码错误");
         return "login";
@@ -62,7 +63,7 @@ public class UserController {
     public String register(UserVo userVo, Model model) {
         LOGGER.info("注册用户详情为：{}", userVo);
         if (userService.register(userVo)) {
-            return "login";
+            return "redirect:/user/";
         }
         model.addAttribute(Constance.ERROR_INFO, "表单数据异常");
         return "register";

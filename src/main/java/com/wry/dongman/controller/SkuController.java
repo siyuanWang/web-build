@@ -3,6 +3,7 @@ package com.wry.dongman.controller;
 import com.wry.dongman.domain.SkuEntity;
 import com.wry.dongman.domain.UserVo;
 import com.wry.dongman.service.SkuService;
+import com.wry.dongman.util.CommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -50,19 +52,21 @@ public class SkuController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveSku(SkuEntity entity, Model model) {
         skuService.insertSku(entity);
-        return "rootlist";
+        return "redirect:/sku/rootlist";
     }
 
     @RequestMapping(value = "/up/{id}", method = RequestMethod.POST)
+    @ResponseBody
     public String up(@PathVariable("id") Long id, Model model) {
         skuService.up(id);
-        return "rootlist";
+        return CommonUtil.successResponse();
     }
 
     @RequestMapping(value = "/down/{id}", method = RequestMethod.POST)
+    @ResponseBody
     public String down(@PathVariable("id") Long id, Model model) {
         skuService.down(id);
-        return "rootlist";
+        return CommonUtil.successResponse();
     }
 
 }
