@@ -10,9 +10,9 @@
             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 对包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 需要更改 -->
-    <context:component-scan base-package="com.wsy.webseed.controller"/>
-    <context:component-scan base-package="com.wsy.webseed.service"/>
-    <context:component-scan base-package="com.wsy.webseed.dao"/>
+    <context:component-scan base-package="com.wry.dongman.controller"/>
+    <context:component-scan base-package="com.wry.dongman.service"/>
+    <context:component-scan base-package="com.wry.dongman.dao"/>
 
     <bean id="configBean" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -26,12 +26,12 @@
 
     <!-- 激活@Controller模式 -->
     <mvc:annotation-driven/>
-    <mvc:view-controller path="/" view-name="redirect:/index/"/>
+    <mvc:view-controller path="/" view-name="redirect:/login/"/>
     <mvc:resources mapping="/**" location="/static"/>
 
     <import resource="classpath*:spring/application.xml"/>
 
-    <bean id="springContextUtil" class="com.wsy.webseed.util.SpringContextUtil"/>
+    <bean id="springContextUtil" class="com.wry.dongman.util.SpringContextUtil"/>
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 
     <!-- 国际化  end-->

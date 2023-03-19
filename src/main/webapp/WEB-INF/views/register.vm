@@ -1,0 +1,38 @@
+<div id="content">
+    <!--breadcrumbs-->
+    <div id="content-header">
+        <div id="breadcrumb"> <a href="/index/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+
+    </div>
+    <!--End-breadcrumbs-->
+
+    <!--Action boxes-->
+    <div class="container-fluid">
+        <form action="/user/register" method="post">
+          <div class="form-group">
+            <label>电子邮件</label>
+            <input type="email" class="form-control" name="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label>用户昵称</label>
+            <input type="text" class="form-control" name="name" placeholder="昵称">
+          </div>
+          <div class="form-group">
+            <label>密码</label>
+            <input type="password" class="form-control" name="password" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label>再次输入密码</label>
+            <input type="password" class="form-control" name="password2" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label>性别</label>
+            <input type="radio" name="sex" value="0" checked/>男
+            <input type="radio" name="sex" value="1"/>女
+          </div>
+          <div class="form-group">
+             <button type="submit" class="btn btn-danger">注册</button>
+          </div>
+        </form>
+    </div>
+</div>

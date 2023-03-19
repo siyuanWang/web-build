@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wry.dongman.dao.SkuMapper">
+
+    <select id="queryById" resultType="com.wry.dongman.domain.SkuEntity">
+        select id,name,pic_url picUrl,description,price,num,status,ctime,utime from sku_t where id = #{id}
+    </select>
+
+    <select id="queryAll" resultType="com.wry.dongman.domain.SkuEntity">
+        select id,name,pic_url picUrl,description,price,num,status,ctime,utime from sku_t order by utime limit 10000;
+    </select>
+
+    <select id="queryAllUp" resultType="com.wry.dongman.domain.SkuEntity">
+        select id,name,pic_url picUrl,description,price,num,status,ctime,utime from sku_t where status = 1 order by utime limit 10000;
+    </select>
+
+    <insert id="insert" parameterType="com.wry.dongman.domain.SkuEntity">
+        insert into sku_t (name,pic_url,description,price,num,status,ctime) values (#{sku.name}, #{sku.picUrl}, #{sku.description}, #{sku.price}, #{sku.num},#{sku.status},#{sku.ctime})
+    </insert>
+
+    <update id="up">
+        update sku_t set status = 1 where id = #{id}
+    </update>
+
+    <update id="down">
+        update sku_t set status = 0 where id = #{id}
+    </update>
+</mapper>
