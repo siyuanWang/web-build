@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
 
 public class CommonUtil {
@@ -53,6 +54,14 @@ public class CommonUtil {
         jsonObject.put("code", 200);
         jsonObject.put("msg", "success");
         return jsonObject.toJSONString();
+    }
+
+    public static long getUserId(HttpServletRequest request) {
+        return (long) request.getSession().getAttribute("userId");
+    }
+
+    public static void setUserId(HttpServletRequest request, long userId) {
+        request.getSession().setAttribute("userId", userId);
     }
 
 }

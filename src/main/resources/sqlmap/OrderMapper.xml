@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wry.dongman.dao.OrderMapper">
+
+    <select id="queryById" resultType="com.wry.dongman.domain.OrderEntity">
+        select id,user_id userId, position, ctime, utime from order_t where id = #{id}
+    </select>
+
+    <select id="queryAll" resultType="com.wry.dongman.domain.OrderEntity">
+        select id,user_id userId, position, ctime, utime from order_t
+    </select>
+
+    <select id="queryByUserId" resultType="com.wry.dongman.domain.OrderEntity">
+        select id,user_id userId, position, ctime, utime from order_t where user_id = #{userId}
+    </select>
+
+    <insert id="insert" parameterType="com.wry.dongman.domain.OrderEntity">
+        insert into order_t (user_id, position, ctime) values (#{order.userId}, #{order.position}, #{order.ctime})
+    </insert>
+</mapper>

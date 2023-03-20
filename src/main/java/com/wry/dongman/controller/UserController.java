@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -45,9 +46,9 @@ public class UserController {
 
     //登录
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(String username, String password, Model model) {
+    public String login(String username, String password, Model model, HttpServletRequest request) {
         LOGGER.info("username:{},password:{}", username, password);
-        int ret = userService.login(username, password);
+        int ret = userService.login(username, password, request);
         ModelAndView mv = new ModelAndView();
         if (ret == Constance.Root_User) {//管理员页面
             return "redirect:/sku/rootlist";

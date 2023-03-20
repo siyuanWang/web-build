@@ -35,7 +35,7 @@ public class SkuController {
         List<SkuEntity> list = skuService.queryAll();
         LOGGER.info("list size:{}", list.size());
         model.addAttribute("list", list);
-        return "rootlist";
+        return "rootskulist";
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -52,7 +52,7 @@ public class SkuController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveSku(SkuEntity entity, Model model) {
         skuService.insertSku(entity);
-        return "redirect:/sku/rootlist";
+        return "redirect:/sku/rootskulist";
     }
 
     @RequestMapping(value = "/up/{id}", method = RequestMethod.POST)
