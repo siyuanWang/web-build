@@ -1,0 +1,47 @@
+#set($firstMenu=2)
+<div id="content">
+    <!--breadcrumbs-->
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="/index/" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
+            <a href="/statistics/list" title="问卷统计分析" class="tip-bottom"><i class="icon-home"></i>问卷统计分析</a>
+        </div>
+    </div>
+    <!--End-breadcrumbs-->
+
+    <!--Action boxes-->
+    <div class="container-fluid">
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                <h5>订单管理页面</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                    <tr>
+                        <th>skuId</th>
+                        <th>sku名称</th>
+                        <th>收藏时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="orderTable">
+                        #foreach($!vo in $!list)
+                        <tr>
+                            <td>$!vo.skuId</td>
+                            <td>
+                                $!vo.skuName
+                            </td>
+                            <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss',$!vo.ctime)</td>
+                        </tr>
+                        #end
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['scripts/common/dataTable'], function () {
+    });
+</script>
