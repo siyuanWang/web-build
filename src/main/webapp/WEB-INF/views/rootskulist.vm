@@ -1,10 +1,11 @@
 #set($firstMenu=2)
+#set($secondMenu=1)
 <div id="content">
     <!--breadcrumbs-->
     <div id="content-header">
         <div id="breadcrumb">
-            <a href="/index/" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
-            <a href="/statistics/list" title="问卷统计分析" class="tip-bottom"><i class="icon-home"></i>问卷统计分析</a>
+            <a href="/user/index" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
+            <a href="/sku/list" title="商品列表" class="tip-bottom"><i class="icon-home"></i>商品列表</a>
         </div>
     </div>
     <!--End-breadcrumbs-->
@@ -54,6 +55,7 @@
                                 #else
                                     <span style="color:red">下架</span>
                                 #end
+                            </td>
                             <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss',$!vo.ctime)</td>
                             <td>
                                 <button type="button" class="btn btn-success" data-id="$!vo.id">
@@ -61,6 +63,9 @@
                                 </button>
                                 <button type="button" class="btn btn-danger" data-id="$!vo.id">
                                    下架
+                                </button>
+                                <button type="button" class="btn btn-default" data-id="$!vo.id">
+                                   调整库存
                                 </button>
                             </td>
                         </tr>
@@ -105,6 +110,26 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         <button id="skuDownBtn" type="button" class="btn btn-primary" data-id="-1">确认下架</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 库存弹窗 -->
+<div class="modal fade" id="skuNum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">商品操作</h4>
+      </div>
+      <div class="modal-body">
+         库存调整
+         <input type="number" id="skuNumInput" placeholder="库存调整"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button id="skuNumBtn" type="button" class="btn btn-primary" data-id="-1">确认</button>
       </div>
     </div>
   </div>

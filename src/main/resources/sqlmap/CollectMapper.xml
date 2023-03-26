@@ -3,10 +3,15 @@
 <mapper namespace="com.wry.dongman.dao.CollectMapper">
 
     <select id="queryByUserId" resultType="com.wry.dongman.domain.CollectEntity">
-        select *from collect_t where id = #{id}
+        select id, sku_id skuId, user_id userId,ctime, utime from collect_t where user_id = #{id}
+    </select>
+
+    <select id="queryByUserIdAndSkuId" resultType="com.wry.dongman.domain.CollectEntity">
+        select id, sku_id skuId, user_id userId,ctime, utime
+            from collect_t where user_id = #{id} and sku_id = #{skuId}
     </select>
 
     <insert id="insert" parameterType="com.wry.dongman.domain.CollectEntity">
-        insert into collect_t (user_id,sku_id,ctime) values (#{collect.userId}, #{user.skuId}, #{user.ctime})
+        insert into collect_t (user_id,sku_id,ctime) values (#{collect.userId}, #{collect.skuId}, #{collect.ctime})
     </insert>
 </mapper>

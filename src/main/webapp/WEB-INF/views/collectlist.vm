@@ -1,10 +1,11 @@
 #set($firstMenu=2)
+#set($secondMenu=2)
 <div id="content">
     <!--breadcrumbs-->
     <div id="content-header">
         <div id="breadcrumb">
-            <a href="/index/" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
-            <a href="/statistics/list" title="问卷统计分析" class="tip-bottom"><i class="icon-home"></i>问卷统计分析</a>
+            <a href="/user/index/" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
+            <a href="/collect/list" title="收藏列表" class="tip-bottom"><i class="icon-home"></i>收藏列表</a>
         </div>
     </div>
     <!--End-breadcrumbs-->
@@ -13,7 +14,7 @@
     <div class="container-fluid">
         <div class="widget-box">
             <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
-                <h5>订单管理页面</h5>
+                <h5>我的收藏</h5>
             </div>
             <div class="widget-content nopadding">
                 <table class="table table-bordered data-table">
@@ -22,6 +23,7 @@
                         <th>skuId</th>
                         <th>sku名称</th>
                         <th>收藏时间</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="orderTable">
@@ -32,6 +34,11 @@
                                 $!vo.skuName
                             </td>
                             <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss',$!vo.ctime)</td>
+                            <td>
+                                <a href="/order/toSave/$!vo.id" class="btn btn-danger">
+                                   下单
+                                </a>
+                            </td>
                         </tr>
                         #end
                     </tbody>

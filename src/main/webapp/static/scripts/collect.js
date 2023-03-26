@@ -16,13 +16,6 @@ define(['jquery', 'response-common'], function ($, rc) {
         $("#skuDown").modal('show')
     })
 
-     $("#skuTable").find(".btn-default").click(function(e) {
-        var id = $(e.srcElement).data("id")
-        $("#skuNumBtn").attr("data-id", id);
-        $("#skuNumInput").val(0);
-        $("#skuNum").modal('show')
-    })
-
     $("#skuUpBtn").click(function(e) {
         var id = $(e.srcElement).data("id")
         $.ajax({
@@ -55,25 +48,5 @@ define(['jquery', 'response-common'], function ($, rc) {
             }
         });
     })
-
-    $("#skuNumBtn").click(function(e) {
-        var id = $(e.srcElement).data("id")
-        var num = $("#skuNumInput").val();
-        $.ajax({
-            type:"post",
-            url:"/sku/purchase/" + id + "/" + num,
-            data:{},
-            dataType: "json",
-            success:function (data) {
-                if (data.code == 200) {
-                    location.reload();
-                } else {
-                    console.log(data);
-                }
-            }
-        });
-    })
-
-
 
 });

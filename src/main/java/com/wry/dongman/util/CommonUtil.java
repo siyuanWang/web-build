@@ -56,12 +56,34 @@ public class CommonUtil {
         return jsonObject.toJSONString();
     }
 
+    public static String failResponse(String msg) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code", 400);
+        jsonObject.put("msg", msg);
+        return jsonObject.toJSONString();
+    }
+
+
+    public static boolean isRoot(HttpServletRequest request) {
+        int userType = (int) request.getSession().getAttribute("userType");
+        return userType == Constance.Root_User;
+    }
     public static long getUserId(HttpServletRequest request) {
         return (long) request.getSession().getAttribute("userId");
     }
 
-    public static void setUserId(HttpServletRequest request, long userId) {
+    public static String getLoginName(HttpServletRequest request) {
+        return (String) request.getSession().getAttribute("loginName");
+    }
+
+    public static void setUserId(HttpServletRequest request, long userId, String loginName, int type) {
         request.getSession().setAttribute("userId", userId);
+        request.getSession().setAttribute("loginName", loginName);
+        request.getSession().setAttribute("userType", type);
+    }
+
+    public static void logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("userId");
     }
 
 }

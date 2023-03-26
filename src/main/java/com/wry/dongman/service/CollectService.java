@@ -5,6 +5,7 @@ import com.wry.dongman.dao.SkuMapper;
 import com.wry.dongman.domain.CollectEntity;
 import com.wry.dongman.domain.CollectVo;
 import com.wry.dongman.domain.SkuEntity;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,16 @@ public class CollectService {
     }
 
     public int insert(CollectEntity entity) {
+        SkuEntity sku = skuMapper.queryById(entity.getSkuId());
+        if (sku == null) {
+            LOGGER.warn("sku不存在");
+            return 0;
+        }
+        List<CollectEntity> list = collectMapper.queryByUserIdAndSkuId(entity.getUserId(), entity.getSkuId());
+        if (CollectionUtils.isNotEmpty(list)) {
+            LOGGER.info("skuId:{}, userId:{}已存在", entity.getSkuId(), entity.getUserId());
+            return 1;
+        }
         entity.setCtime(new Date());
         return collectMapper.insert(entity);
     }

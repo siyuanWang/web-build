@@ -1,5 +1,6 @@
 package com.wry.dongman.service;
 
+import com.wry.dongman.util.CommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -24,7 +25,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        LOGGER.info("post .................");
+        Object loginName = httpServletRequest.getSession().getAttribute("loginName");
+        if (loginName != null && modelAndView != null)
+            modelAndView.addObject("loginName", loginName);
+            modelAndView.addObject("isRoot", CommonUtil.isRoot(httpServletRequest));
     }
 
     @Override

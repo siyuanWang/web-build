@@ -7,6 +7,8 @@ public class OrderEntity {
 
     private Long userId;
 
+    private Long skuId;
+
     private String position;
 
     private Date ctime;
@@ -27,6 +29,14 @@ public class OrderEntity {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Long getSkuId() {
+        return skuId;
+    }
+
+    public void setSkuId(Long skuId) {
+        this.skuId = skuId;
     }
 
     public String getPosition() {
@@ -55,7 +65,7 @@ public class OrderEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
+        return "OrderEntity{" +
                 "id=" + id +
                 "userId=" + userId +
                 "position=" + position +

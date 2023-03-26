@@ -1,0 +1,43 @@
+#set($firstMenu=2)
+#set($secondMenu=3)
+<div id="content">
+    <!--breadcrumbs-->
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="/user/index" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
+            <a href="/sku/list" title="商品列表" class="tip-bottom"><i class="icon-home"></i>我的订单</a>
+        </div>
+    </div>
+    <!--End-breadcrumbs-->
+
+    <!--Action boxes-->
+    <div class="container-fluid">
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                <h5>动漫周边商品商城</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form action="/order/save" method="post">
+                  <div class="form-group">
+                    <label>商品名称:<span style="color:green">$!sku.name</span></label>
+                    <input type="hidden" name="skuId" value="$!sku.id"/>
+                  </div>
+                  <div class="form-group">
+                    <label>收货地址</label>
+                    <input type="text" class="form-control" name="position" placeholder="地址">
+                  </div>
+
+                  <div class="form-group">
+                     <button type="submit" class="btn btn-success">确认下单</button>
+                  </div>
+                  <p>$!errorInfo</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([], function () {
+    });
+</script>

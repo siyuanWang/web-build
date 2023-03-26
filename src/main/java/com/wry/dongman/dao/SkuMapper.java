@@ -20,4 +20,8 @@ public interface SkuMapper extends ISqlMapper {
     int up(Long id);
 
     int down(Long id);
+
+    int sale(@Param("id") Long id, @Param("num") int num);
+
+    int purchase(@Param("id") Long id, @Param("num") int num);
 }

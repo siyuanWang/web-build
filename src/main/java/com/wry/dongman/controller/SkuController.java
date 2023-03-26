@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -30,18 +31,15 @@ public class SkuController {
         LOGGER.info("SkuController初始化完毕");
     }
 
-    @RequestMapping(value = "/rootlist", method = RequestMethod.GET)
-    public String toRootList(Model model) {
-        List<SkuEntity> list = skuService.queryAll();
-        LOGGER.info("list size:{}", list.size());
-        model.addAttribute("list", list);
-        return "rootskulist";
-    }
-
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String toList(Model model) {
+    public String toList(Model model, HttpServletRequest request) {
+        if (CommonUtil.isRoot(request)) {
+            List<SkuEntity> list = skuService.queryAll();
+            model.addAttribute("list", list);
+            return "rootskulist";
+        }
         model.addAttribute("list", skuService.queryAllUp());
-        return "list";
+        return "skulist";
     }
     @RequestMapping(value = "/tosave", method = RequestMethod.GET)
     public String toSave(Model model) {
@@ -52,7 +50,7 @@ public class SkuController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveSku(SkuEntity entity, Model model) {
         skuService.insertSku(entity);
-        return "redirect:/sku/rootskulist";
+        return "redirect:/sku/list";
     }
 
     @RequestMapping(value = "/up/{id}", method = RequestMethod.POST)
@@ -68,5 +66,24 @@ public class SkuController {
         skuService.down(id);
         return CommonUtil.successResponse();
     }
+
+    /**
+     * 调整库存
+     * @param id
+     * @param num
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/purchase/{id}/{num}", method = RequestMethod.POST)
+    @ResponseBody
+    public String purchase(@PathVariable("id") Long id, @PathVariable("num") Integer num, Model model) {
+        if (skuService.purchase(id, num) ==  200) {
+            return CommonUtil.successResponse();
+        } else {
+            return CommonUtil.failResponse("商品不在线");
+        }
+    }
+
+
 
 }

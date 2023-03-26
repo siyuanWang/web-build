@@ -3,6 +3,7 @@ package com.wry.dongman.controller;
 import com.wry.dongman.dao.UserMapper;
 import com.wry.dongman.domain.UserVo;
 import com.wry.dongman.service.UserService;
+import com.wry.dongman.util.CommonUtil;
 import com.wry.dongman.util.Constance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +31,20 @@ public class UserController {
         LOGGER.info("UserController初始化完毕");
     }
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String toIndex() {
+        return "index";
+    }
     //登录页面
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String toLogin() {
         LOGGER.info("to login.{}", System.currentTimeMillis());
         return "login";
+    }
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String toUserList(Model model) {
+        model.addAttribute("list", userService.queryList());
+        return "userlist";
     }
 
     //注册页面
@@ -49,14 +59,20 @@ public class UserController {
     public String login(String username, String password, Model model, HttpServletRequest request) {
         LOGGER.info("username:{},password:{}", username, password);
         int ret = userService.login(username, password, request);
-        ModelAndView mv = new ModelAndView();
         if (ret == Constance.Root_User) {//管理员页面
-            return "redirect:/sku/rootlist";
+            return "redirect:/user/index";
         } else if (ret == Constance.General_User) {//用户页面
-            return "redirect:/sku/list";
+            return "redirect:/user/index";
         }
         model.addAttribute(Constance.ERROR_INFO, "用户名或密码错误");
         return "login";
+    }
+
+    @RequestMapping(value = "/loginout", method = RequestMethod.GET)
+    public String loginout(HttpServletRequest request) {
+        LOGGER.info("username:{} login out.", CommonUtil.getLoginName(request));
+        CommonUtil.logout(request);
+        return "redirect:/user/";
     }
 
     //注册

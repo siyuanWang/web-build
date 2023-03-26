@@ -11,7 +11,7 @@
     </select>
 
     <select id="queryAllUp" resultType="com.wry.dongman.domain.SkuEntity">
-        select id,name,pic_url picUrl,description,price,num,status,ctime,utime from sku_t where status = 1 order by utime limit 10000;
+        select id,name,pic_url picUrl,description,price,num,status,ctime,utime from sku_t where status = 1 and num > 0 order by utime limit 10000;
     </select>
 
     <insert id="insert" parameterType="com.wry.dongman.domain.SkuEntity">
@@ -24,5 +24,13 @@
 
     <update id="down">
         update sku_t set status = 0 where id = #{id}
+    </update>
+
+    <update id="sale">
+        update sku_t set num = #{num} where id = #{id}
+    </update>
+
+    <update id="purchase">
+        update sku_t set num = #{num} where id = #{id}
     </update>
 </mapper>

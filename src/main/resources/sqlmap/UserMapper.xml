@@ -6,6 +6,10 @@
         select *from user_t where id = #{id}
     </select>
 
+    <select id="queryAll" resultType="com.wry.dongman.domain.UserEntity">
+        select id,type,email,name,sex,ctime,utime from user_t order by type desc,ctime
+    </select>
+
     <select id="queryByEmail" resultType="com.wry.dongman.domain.UserEntity">
         select *from user_t where email = #{email}
     </select>

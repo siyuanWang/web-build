@@ -1,11 +1,11 @@
-#set($firstMenu=2)
-#set($secondMenu=3)
+#set($firstMenu=1)
+#set($secondMenu=1)
 <div id="content">
     <!--breadcrumbs-->
     <div id="content-header">
         <div id="breadcrumb">
-            <a href="/user/index" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
-            <a href="/order/list" title="我的订单" class="tip-bottom"><i class="icon-home"></i>我的订单</a>
+            <a href="/user/index/" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
+            <a href="/statistics/list" title="用户管理" class="tip-bottom"><i class="icon-home"></i>用户信息</a>
         </div>
     </div>
     <!--End-breadcrumbs-->
@@ -14,35 +14,39 @@
     <div class="container-fluid">
         <div class="widget-box">
             <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
-                <h5>我的订单</h5>
+                <h5>用户信息</h5>
             </div>
             <div class="widget-content nopadding">
                 <table class="table table-bordered data-table">
                     <thead>
                     <tr>
-                        <th>订单ID</th>
                         <th>用户ID</th>
-                        <th>skuID</th>
-                        <th>sku名称</th>
-                        <th>配送位置</th>
-                        <th>下单时间</th>
+                        <th>性别</th>
+                        <th>email</th>
+                        <th>角色</th>
+                        <th>注册时间</th>
                     </tr>
                     </thead>
-                    <tbody id="orderTable">
+                    <tbody id="userTable">
                         #foreach($!vo in $!list)
                         <tr>
                             <td>$!vo.id</td>
                             <td>
-                                $!vo.userId
+                                #if ($!vo.sex == 0)
+                                    男
+                                #else
+                                    女
+                                #end
                             </td>
                             <td>
-                                $!vo.skuId
+                                $!vo.email
                             </td>
                             <td>
-                                $!vo.skuName
-                            </td>
-                            <td>
-                                $!vo.position
+                                #if ($!vo.type == 0)
+                                    <span style="color:green">用户</span>
+                                #else
+                                    <span style="color:red">管理员</span>
+                                #end
                             </td>
                             <td>$!dateTool.format('yyyy-MM-dd HH:mm:ss',$!vo.ctime)</td>
                         </tr>

@@ -1,15 +1,27 @@
 <!--sidebar-menu-->
 <div id="sidebar">
     <ul>
-        <li class="submenu #if($firstMenu == 1)active open#end"> <a href="#"><i class="icon icon-th-list"></i> <span>大搜数据库</span></a>
+        <li class="submenu #if($firstMenu == 0)active open#end"> <a href="#"><i class="icon icon-th-list"></i> <span>首页</span></a>
             <ul>
-                <li><a href="/db/query">中间表查询</a></li>
-                <li><a href="/bulk/list">游记数据重跑</a></li>
+                <li><a href="/user/index">首页</a></li>
             </ul>
         </li>
-        <li class="submenu #if($firstMenu == 2)active open#end"> <a href="#"><i class="icon icon-th-list"></i> <span>日常运维</span></a>
+        #if ($!isRoot)
+        <li class="submenu #if($firstMenu == 1)active open#end"> <a href="#"><i class="icon icon-th-list"></i> <span>用户管理</span></a>
             <ul>
-                <li><a href="/statistics/list">工单申请</a></li>
+                <li class="#if($secondMenu == 1)active open#end"><a href="/user/list">用户信息</a></li>
+            </ul>
+        </li>
+        #end
+        <li class="submenu #if($firstMenu == 2)active open#end"> <a href="#"><i class="icon icon-th-list"></i> <span>动漫周边商品管理</span></a>
+            <ul>
+                <li class="#if($secondMenu == 1)active open#end"><a href="/sku/list">商品列表</a></li>
+                #if ($!isRoot)
+                    <li class="#if($secondMenu == 3)active open#end"><a href="/order/list">订单管理</a></li>
+                #else
+                    <li class="#if($secondMenu == 2)active open#end"><a href="/collect/list">我的收藏</a></li>
+                    <li class="#if($secondMenu == 3)active open#end"><a href="/order/list">我的订单</a></li>
+                #end
             </ul>
         </li>
     </ul>

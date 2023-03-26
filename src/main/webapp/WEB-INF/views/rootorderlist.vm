@@ -1,10 +1,11 @@
 #set($firstMenu=2)
+#set($secondMenu=3)
 <div id="content">
     <!--breadcrumbs-->
     <div id="content-header">
         <div id="breadcrumb">
-            <a href="/index/" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
-            <a href="/statistics/list" title="问卷统计分析" class="tip-bottom"><i class="icon-home"></i>问卷统计分析</a>
+            <a href="/user/index/" title="首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
+            <a href="/order/list" title="订单管理" class="tip-bottom"><i class="icon-home"></i>订单管理</a>
         </div>
     </div>
     <!--End-breadcrumbs-->
@@ -21,6 +22,8 @@
                     <tr>
                         <th>订单ID</th>
                         <th>用户ID</th>
+                        <th>SkuID</th>
+                        <th>Sku名称</th>
                         <th>配送位置</th>
                         <th>下单时间</th>
                     </tr>
@@ -31,6 +34,12 @@
                             <td>$!vo.id</td>
                             <td>
                                 $!vo.userId
+                            </td>
+                             <td>
+                                $!vo.skuId
+                            </td>
+                            <td>
+                                $!vo.skuName
                             </td>
                             <td>
                                 $!vo.position

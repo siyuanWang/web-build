@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -19,12 +21,28 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+    public List<UserVo> queryList() {
+        List<UserEntity> list = userMapper.queryAll();
+        List<UserVo> ret = new ArrayList<>();
+        list.forEach(x -> {
+            UserVo vo = new UserVo();
+            vo.setId(x.getId());
+            vo.setCtime(x.getCtime());
+            vo.setUtime(x.getUtime());
+            vo.setSex(x.getSex());
+            vo.setEmail(x.getEmail());
+            vo.setType(x.getType());
+            ret.add(vo);
+        });
+        return ret;
+    }
+
     public int login(String username, String password, HttpServletRequest request) {
         UserEntity entity = userMapper.queryByEmail(username);
         if (entity != null) {
             LOGGER.info("user entity info:{}", entity.toString());
             if (entity.getPassword().equals(password)) {
-                CommonUtil.setUserId(request, entity.getId());
+                CommonUtil.setUserId(request, entity.getId(), entity.getName(), entity.getType());
                 return entity.getType();
             }
         }

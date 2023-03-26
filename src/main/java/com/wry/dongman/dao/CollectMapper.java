@@ -10,5 +10,7 @@ public interface CollectMapper extends ISqlMapper {
 
     List<CollectEntity> queryByUserId(@Param("id") long id);
 
+    List<CollectEntity> queryByUserIdAndSkuId(@Param("id") long id, @Param("skuId") long skuId);
+
     int insert(@Param("collect") CollectEntity sku);
 }
